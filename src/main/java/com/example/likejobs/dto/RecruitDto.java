@@ -5,6 +5,9 @@ import lombok.Getter;
 
 @Data
 @Getter
+/**
+ * 공고문 작성 시에 입력받는 폼
+ */
 public class RecruitDto {
     private String companyName; //회사 이름
     private String title; //공고문 제목
