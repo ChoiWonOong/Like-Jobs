@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class MemberController {
     private final MemberService memberService;
 
-    @GetMapping("/me")
+    @GetMapping("/me")  // 자신 객체 반환
     public ResponseEntity<MemberResponseDto> findMemberById() {
         return ResponseEntity.ok(memberService.findMemberById(SecurityUtil.getCurrentMemberId()));
     }

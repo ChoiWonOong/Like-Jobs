@@ -10,6 +10,8 @@ import com.example.likejobs.jwt.TokenProvider;
 import com.example.likejobs.service.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 public class AuthController {
     private final TokenProvider tokenProvider;
     private final AuthService authService;
+    private final TokenProvider jwtTokenProvider;
 
     @PostMapping("/member/signup")
     public ResponseEntity<MemberResponseDto> memberSignup(@RequestBody MemberRequestDto memberRequestDto) {
@@ -43,4 +46,11 @@ public class AuthController {
     public ResponseEntity<TokenDto> reissue(@RequestBody TokenRequestDto tokenRequestDto) {
         return ResponseEntity.ok(authService.reissue(tokenRequestDto));
     }
+
+    @PatchMapping("/logout")
+    public ResponseEntity<String> logout(@AuthenticationPrincipal User user, @RequestBody TokenDto tokenDto) {
+        System.out.println(user.getAuthorities());
+        return ResponseEntity.ok(authService.logout(tokenDto.getAccessToken(), user));
+    }
+
 }

@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class CompanyController {
     private final CompanyService companyService;
 
-    @GetMapping("/me")
+    @GetMapping("/me")  // 자신 객체 반환
     public ResponseEntity<CompanyResponseDto> findMemberById() {
         return ResponseEntity.ok(companyService.findCompanyById(SecurityUtil.getCurrentMemberId()));
     }
