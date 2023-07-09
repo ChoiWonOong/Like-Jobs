@@ -1,4 +1,4 @@
-package com.example.likejobs.service;
+package com.example.likejobs.service.member;
 
 import com.example.likejobs.dto.member.MemberResponseDto;
 import com.example.likejobs.repository.MemberRepository;

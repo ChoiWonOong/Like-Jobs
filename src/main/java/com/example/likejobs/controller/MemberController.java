@@ -2,7 +2,7 @@ package com.example.likejobs.controller;
 
 import com.example.likejobs.dto.member.MemberResponseDto;
 import com.example.likejobs.util.SecurityUtil;
-import com.example.likejobs.service.MemberService;
+import com.example.likejobs.service.member.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

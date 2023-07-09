@@ -5,8 +5,8 @@ import com.example.likejobs.jwt.JwtAuthenticationEntryPoint;
 import com.example.likejobs.jwt.TokenProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
+import org.springframework.context.annotation.Configuration
+        ;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -29,7 +29,7 @@ public class SecurityConfig {
                 .authorizeRequests(
                         request->request.requestMatchers("/auth/**").permitAll()
                                 .requestMatchers("/member/**").hasAnyRole("USER")
-                                .requestMatchers( "/company/**").hasRole("COMPANY")
+                                .requestMatchers( "/company/**").hasAnyRole("COMPANY")
                                 .requestMatchers("/").permitAll()
                                 .anyRequest().permitAll()
                 )

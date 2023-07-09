@@ -1,14 +1,12 @@
 package com.example.likejobs.domain;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
 @Getter
 @Setter
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class Recruit {
@@ -26,4 +24,17 @@ public class Recruit {
     private Education education;
     private String career;
 
+    @Builder
+    public Recruit(String title, Job job, Education education, String career, Company company){
+        this.title = title;
+        this.job = job;
+        this.education = education;
+        this.career = career;
+        this.company = company;
+    }
+    public static Recruit toRecruit(Company company){
+        Recruit recruit = new Recruit();
+        recruit.company = company;
+        return recruit;
+    }
 }
