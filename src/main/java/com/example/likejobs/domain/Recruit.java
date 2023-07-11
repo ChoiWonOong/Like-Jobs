@@ -37,4 +37,8 @@ public class Recruit {
         recruit.company = company;
         return recruit;
     }
+    /**
+     @OneToMany(mappedBy = "recruit", cascade = CascadeType.REMOVE, orphanRemoval = true, fetch = FetchType.LAZY)
+     private List<Resume> resumeList = new ArrayList<>();
+     **/
 }

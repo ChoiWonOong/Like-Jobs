@@ -1,8 +1,8 @@
 package com.example.likejobs.controller;
 
 import com.example.likejobs.dto.member.MemberResponseDto;
-import com.example.likejobs.util.SecurityUtil;
 import com.example.likejobs.service.member.MemberService;
+import com.example.likejobs.util.SecurityUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,4 +25,10 @@ public class MemberController {
     public ResponseEntity<MemberResponseDto> findMemberByUsername(@PathVariable String username) {
         return ResponseEntity.ok(memberService.findMemberByUsername(username));
     }
+    /**
+    @PutMapping("/me/update")
+    public ResponseEntity<MemberResponseDto> updateMember(@RequestBody MemberUpdateRequestDto updateRequestDto){
+        return ResponseEntity.ok(memberService.updateMember(updateRequestDto));
+    }
+    **/
 }

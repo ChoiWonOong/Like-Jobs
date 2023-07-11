@@ -8,6 +8,6 @@ import java.util.List;
 @Getter
 @Setter
 public class ResumeRequestDto {
-    private String companyName;
+    private String recruitTitle;
     private List<CareerDto> careerList;
 }

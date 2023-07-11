@@ -1,10 +1,11 @@
 package com.example.likejobs.dto.recruit;
 
 import com.example.likejobs.domain.Company;
-import com.example.likejobs.domain.Education;
-import com.example.likejobs.domain.Job;
 import com.example.likejobs.domain.Recruit;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Getter
 @Setter
@@ -17,8 +18,8 @@ import lombok.*;
 public class RecruitDto {
     private String companyName; //회사 이름
     private String title; //공고문 제목
-    private Job job; // 직종(enterprise/design/marketing/engineering/food/educate)
-    private Education education; //학력(HIGH_SCHOOL/UNIVERSITY/IRRELEVANT)
+    private String job; // 직종(enterprise/design/marketing/engineering/food/educate)
+    private String education; //학력(HIGH_SCHOOL/UNIVERSITY/IRRELEVANT)
     private String career; //경력
 
     public Recruit toRecruit(Company company){
@@ -30,8 +31,8 @@ public class RecruitDto {
         RecruitDto recruitDto =  new RecruitDto();
         recruitDto.setCompanyName(recruit.getCompany().getCompanyName());
         recruitDto.setTitle(recruit.getTitle());
-        recruitDto.setJob(recruit.getJob());
-        recruitDto.setEducation(recruit.getEducation());
+        recruitDto.setJob(recruit.getJob().toString());
+        recruitDto.setEducation(recruit.getEducation().toString());
         recruitDto.setCareer(recruit.getCareer());
         return recruitDto;
     }

@@ -52,5 +52,4 @@ public class AuthController {
         System.out.println(user.getAuthorities());
         return ResponseEntity.ok(authService.logout(tokenDto.getAccessToken(), user));
     }
-
 }

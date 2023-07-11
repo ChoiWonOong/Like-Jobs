@@ -12,7 +12,7 @@ import java.util.List;
 @NoArgsConstructor
 public class ResumeResponseDto {
     private Long resumeId;
-    private String companyName;
+    private String recruitTitle;
     private String name;
 
     private String gender;
@@ -32,7 +32,7 @@ public class ResumeResponseDto {
     public static ResumeResponseDto toResumeResponseDto(Resume resume){
         ResumeResponseDto responseDto = new ResumeResponseDto();
         responseDto.resumeId = resume.getId();
-        responseDto.companyName = resume.getCompany().getCompanyName();
+        responseDto.recruitTitle = resume.getRecruit().getTitle();
         responseDto.name = resume.getName();
         responseDto.gender = resume.getGender();
         responseDto.phoneNumber = resume.getPhoneNumber();

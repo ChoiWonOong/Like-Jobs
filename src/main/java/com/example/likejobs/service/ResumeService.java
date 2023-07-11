@@ -1,16 +1,10 @@
 package com.example.likejobs.service;
 
-import com.example.likejobs.domain.Career;
-import com.example.likejobs.domain.Company;
-import com.example.likejobs.domain.Member;
-import com.example.likejobs.domain.Resume;
+import com.example.likejobs.domain.*;
 import com.example.likejobs.dto.resume.CareerDto;
 import com.example.likejobs.dto.resume.ResumeRequestDto;
 import com.example.likejobs.dto.resume.ResumeResponseDto;
-import com.example.likejobs.repository.CareerRepository;
-import com.example.likejobs.repository.CompanyRepository;
-import com.example.likejobs.repository.MemberRepository;
-import com.example.likejobs.repository.ResumeRepository;
+import com.example.likejobs.repository.*;
 import com.example.likejobs.util.SecurityUtil;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,12 +18,12 @@ import java.util.stream.Collectors;
 public class ResumeService {
     ResumeRepository resumeRepository;
     MemberRepository memberRepository;
-    CompanyRepository companyRepository;
+    RecruitRepository recruitRepository;
     CareerRepository careerRepository;
-    public ResumeService(ResumeRepository resumeRepository, MemberRepository memberRepository, CompanyRepository companyRepository, CareerRepository careerRepository){
+    public ResumeService(ResumeRepository resumeRepository, MemberRepository memberRepository, RecruitRepository recruitRepository, CareerRepository careerRepository){
         this.resumeRepository = resumeRepository;
         this.memberRepository = memberRepository;
-        this.companyRepository = companyRepository;
+        this.recruitRepository = recruitRepository;
         this.careerRepository = careerRepository;
     }
     @Transactional
@@ -39,19 +33,19 @@ public class ResumeService {
             return "일치하는 사용자가 존재하지 않습니다.";
         }
         Member member = optionalMember.get();
-        Optional<Company> optionalCompany = companyRepository.findByCompanyName(requestDto.getCompanyName());
-        if(optionalCompany.isEmpty()){
+        Optional<Recruit> optionalRecruit = recruitRepository.findByTitle(requestDto.getRecruitTitle());
+        if(optionalRecruit.isEmpty()){
             return "일치하는 회사가 존재하지 않습니다.";
         }
-        Company company = optionalCompany.get();
-        Resume resume = Resume.toResume(member, company);
+        Recruit recruit = optionalRecruit.get();
+        Resume resume = Resume.toResume(member,recruit);
 
         resumeRepository.save(resume);
 
         List<CareerDto> careerDtos = requestDto.getCareerList();
         List<Career> careers = new ArrayList<>();
 
-        Resume currentResume = resumeRepository.findByMemberAndCompany(member, company).get();
+        Resume currentResume = resumeRepository.findByMemberAndRecruit(member, recruit).get();
 
         for(CareerDto careerDto : careerDtos ){
             Career career = Career.toCareer(careerDto, currentResume);
@@ -84,7 +78,7 @@ public class ResumeService {
      **/
     public List<ResumeResponseDto> getResume(){
         Member member = memberRepository.findById(SecurityUtil.getCurrentMemberId()).get();
-        return resumeRepository.findAllByMember(member).stream()
+        return member.getResumeList().stream()
                 .map(resume -> ResumeResponseDto.toResumeResponseDto(resume))
                 .collect(Collectors.toList());
     }

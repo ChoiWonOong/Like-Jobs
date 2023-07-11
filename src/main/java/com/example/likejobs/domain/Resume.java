@@ -42,8 +42,8 @@ public class Resume {
     private Member member;
 
     @ManyToOne
-    @JoinColumn(name="company_id")
-    private Company company; //공고문을 작성한 회사
+    @JoinColumn(name="recruit_id")
+    private Recruit recruit; //공고문
 
     @OneToMany(mappedBy = "resume", cascade = CascadeType.REMOVE, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<Career> careerList = new ArrayList<>();
@@ -59,14 +59,14 @@ public class Resume {
         this.major = major;
         this.member = member;
     }
-    public static Resume toResume(Member member, Company company){
+    public static Resume toResume(Member member, Recruit recruit){
         Resume resume = new Resume();
         resume.name = member.getName();
         resume.gender = member.getGender();
         resume.phoneNumber = member.getPhoneNumber();
         resume.email = member.getEmail();
         resume.member = member;
-        resume.company = company;
+        resume.recruit = recruit;
         resume.education = member.getEducation();
         resume.university = member.getUniversity();
         resume.major = member.getMajor();

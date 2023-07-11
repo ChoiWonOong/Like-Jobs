@@ -39,6 +39,4 @@ public class Company {
     @OneToMany(mappedBy = "company", cascade = CascadeType.REMOVE, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<Recruit> recruitList = new ArrayList<>();
 
-    @OneToMany(mappedBy = "company", cascade = CascadeType.REMOVE, orphanRemoval = true, fetch = FetchType.LAZY)
-    private List<Resume> resumeList = new ArrayList<>();
 }

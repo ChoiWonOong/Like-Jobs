@@ -29,4 +29,6 @@ public class CompanyService {
     public Company findCompanyByCompanyName(String companyName){
         return companyRepository.findByCompanyName(companyName).get();
     }
+
+
 }

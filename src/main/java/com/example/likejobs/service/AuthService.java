@@ -2,7 +2,6 @@ package com.example.likejobs.service;
 
 import com.example.likejobs.domain.Company;
 import com.example.likejobs.domain.Member;
-import com.example.likejobs.domain.Recruit;
 import com.example.likejobs.dto.company.CompanyRequestDto;
 import com.example.likejobs.dto.company.CompanyResponseDto;
 import com.example.likejobs.dto.member.MemberCreateRequestDto;
@@ -11,7 +10,10 @@ import com.example.likejobs.dto.token.TokenDto;
 import com.example.likejobs.dto.token.TokenRequestDto;
 import com.example.likejobs.jwt.RefreshToken;
 import com.example.likejobs.jwt.TokenProvider;
-import com.example.likejobs.repository.*;
+import com.example.likejobs.repository.CompanyRepository;
+import com.example.likejobs.repository.MemberRepository;
+import com.example.likejobs.repository.RecruitRepository;
+import com.example.likejobs.repository.RefreshTokenRepository;
 import com.example.likejobs.util.RedisUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -49,7 +51,6 @@ public class AuthService {
         }
 
         Company company = companyRequestDto.toCompany(passwordEncoder);
-        recruitRepository.save(Recruit.toRecruit(company));
         return CompanyResponseDto.of(companyRepository.save(company));
     }
 
