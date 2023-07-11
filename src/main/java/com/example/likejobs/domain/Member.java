@@ -27,12 +27,15 @@ public class Member {
     private String name;
     private String gender;
     private String phoneNumber;
+    private String education;
     private String email;
+    private String university;
+    private String major;
     @Enumerated(EnumType.STRING)
     private Authority authority;
 
     @Builder
-    public Member(String username, String password, String name, String gender, String phoneNumber, String email, Authority authority) {
+    public Member(String username, String password, String name, String gender, String phoneNumber, String email, String university, String major, String education, Authority authority) {
         this.username = username;
         this.password = password;
         this.name = name;
@@ -40,6 +43,9 @@ public class Member {
         this.phoneNumber = phoneNumber;
         this.email = email;
         this.authority = authority;
+        this.university = university;
+        this.major = major;
+        this.education = education;
     }
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE, orphanRemoval = true, fetch = FetchType.LAZY)

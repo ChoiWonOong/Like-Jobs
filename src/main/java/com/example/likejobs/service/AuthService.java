@@ -3,10 +3,9 @@ package com.example.likejobs.service;
 import com.example.likejobs.domain.Company;
 import com.example.likejobs.domain.Member;
 import com.example.likejobs.domain.Recruit;
-import com.example.likejobs.domain.Resume;
 import com.example.likejobs.dto.company.CompanyRequestDto;
 import com.example.likejobs.dto.company.CompanyResponseDto;
-import com.example.likejobs.dto.member.MemberRequestDto;
+import com.example.likejobs.dto.member.MemberCreateRequestDto;
 import com.example.likejobs.dto.member.MemberResponseDto;
 import com.example.likejobs.dto.token.TokenDto;
 import com.example.likejobs.dto.token.TokenRequestDto;
@@ -29,7 +28,6 @@ public class AuthService {
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
     private final MemberRepository memberRepository;
     private final CompanyRepository companyRepository;
-    private final ResumeRepository resumeRepository;
     private final RecruitRepository recruitRepository;
     private final TokenProvider tokenProvider;
     private final RefreshTokenRepository refreshTokenRepository;
@@ -37,13 +35,11 @@ public class AuthService {
     private final RedisUtil redisUtil;
 
     @Transactional
-    public MemberResponseDto memberSignup(MemberRequestDto memberRequestDto) {
-        if (memberRepository.existsByUsername(memberRequestDto.getUsername())) {
+    public MemberResponseDto memberSignup(MemberCreateRequestDto memberCreateRequestDto) {
+        if (memberRepository.existsByUsername(memberCreateRequestDto.getUsername())) {
             throw new RuntimeException("이미 가입되어 있는 유저입니다");
         }
-
-        Member member = memberRequestDto.toMember(passwordEncoder);
-        resumeRepository.save(Resume.toResume(member));
+        Member member = memberCreateRequestDto.toMember(passwordEncoder);
         return MemberResponseDto.of(memberRepository.save(member));
     }
     @Transactional
@@ -58,9 +54,9 @@ public class AuthService {
     }
 
     @Transactional
-    public TokenDto memberLogin(MemberRequestDto memberRequestDto) {
+    public TokenDto memberLogin(MemberCreateRequestDto memberCreateRequestDto) {
         // 1. Login ID/PW 를 기반으로 AuthenticationToken 생성
-        UsernamePasswordAuthenticationToken authenticationToken = memberRequestDto.toAuthentication();
+        UsernamePasswordAuthenticationToken authenticationToken = memberCreateRequestDto.toAuthentication();
 
         return getToken(authenticationToken);
     }

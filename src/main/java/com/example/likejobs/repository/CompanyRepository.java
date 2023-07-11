@@ -10,5 +10,6 @@ import java.util.Optional;
 public interface CompanyRepository extends JpaRepository<Company, Long> {
     // 회사 이름으로 회사 객체 찾기
     Optional<Company> findByCompanyId(String companyId);
+    Optional<Company> findByCompanyName(String companyName);
     boolean existsByCompanyId(String companyId);
 }

@@ -2,7 +2,7 @@ package com.example.likejobs.controller;
 
 import com.example.likejobs.dto.company.CompanyRequestDto;
 import com.example.likejobs.dto.company.CompanyResponseDto;
-import com.example.likejobs.dto.member.MemberRequestDto;
+import com.example.likejobs.dto.member.MemberCreateRequestDto;
 import com.example.likejobs.dto.member.MemberResponseDto;
 import com.example.likejobs.dto.token.TokenDto;
 import com.example.likejobs.dto.token.TokenRequestDto;
@@ -23,13 +23,13 @@ public class AuthController {
     private final TokenProvider jwtTokenProvider;
 
     @PostMapping("/member/signup")
-    public ResponseEntity<MemberResponseDto> memberSignup(@RequestBody MemberRequestDto memberRequestDto) {
-        return ResponseEntity.ok(authService.memberSignup(memberRequestDto));
+    public ResponseEntity<MemberResponseDto> memberSignup(@RequestBody MemberCreateRequestDto memberCreateRequestDto) {
+        return ResponseEntity.ok(authService.memberSignup(memberCreateRequestDto));
     }
 
     @PostMapping("/member/login")
-    public ResponseEntity<TokenDto> memberLogin(@RequestBody MemberRequestDto memberRequestDto) {
-        return ResponseEntity.ok(authService.memberLogin(memberRequestDto));
+    public ResponseEntity<TokenDto> memberLogin(@RequestBody MemberCreateRequestDto memberCreateRequestDto) {
+        return ResponseEntity.ok(authService.memberLogin(memberCreateRequestDto));
     }
 
     @PostMapping("/company/signup")

@@ -13,7 +13,10 @@ public class MemberResponseDto {
     private String gender;
     private String phoneNumber;
     private String email;
+    private String education;
+    private String university;
+    private String major;
     public static MemberResponseDto of(Member member) {
-        return new MemberResponseDto(member.getUsername(), member.getName(), member.getAuthority().toString(), member.getGender(), member.getPhoneNumber(), member.getEmail());
+        return new MemberResponseDto(member.getUsername(), member.getName(), member.getAuthority().toString(), member.getGender(), member.getPhoneNumber(), member.getEmail(), member.getEducation(), member.getUniversity(), member.getMajor());
     }
 }

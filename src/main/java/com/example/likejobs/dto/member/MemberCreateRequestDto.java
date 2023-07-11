@@ -12,7 +12,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class MemberRequestDto {
+public class MemberCreateRequestDto {
     @NotNull
     private String username;
     @NotNull
@@ -26,6 +26,12 @@ public class MemberRequestDto {
     private String phoneNumber;
     @NotNull
     private String email;
+    @NotNull
+    private String education;
+    @NotNull
+    private String university;
+    @NotNull
+    private String major;
     public Member toMember(PasswordEncoder passwordEncoder) {
         return Member.builder()
                 .username(username)
@@ -34,6 +40,9 @@ public class MemberRequestDto {
                 .gender(gender)
                 .phoneNumber(phoneNumber)
                 .email(email)
+                .education(education)
+                .university(university)
+                .major(major)
                 .authority(Authority.ROLE_USER)
                 .build();
     }

@@ -1,5 +1,6 @@
 package com.example.likejobs.service.company;
 
+import com.example.likejobs.domain.Company;
 import com.example.likejobs.dto.company.CompanyResponseDto;
 import com.example.likejobs.repository.CompanyRepository;
 import lombok.RequiredArgsConstructor;
@@ -23,5 +24,9 @@ public class CompanyService {
         return companyRepository.findByCompanyId(companyId)
                 .map(CompanyResponseDto::of)
                 .orElseThrow(() -> new RuntimeException("유저 정보가 없습니다."));
+    }
+
+    public Company findCompanyByCompanyName(String companyName){
+        return companyRepository.findByCompanyName(companyName).get();
     }
 }

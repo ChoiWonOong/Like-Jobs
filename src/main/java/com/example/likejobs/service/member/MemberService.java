@@ -17,8 +17,7 @@ public class MemberService {
     public MemberResponseDto findMemberById(Long memberId) {    //find Entity by id
         return memberRepository.findById(memberId)
                 .map(MemberResponseDto::of)
-                .orElseThrow(() -> new RuntimeException("로그인 유저 정보가 없습니다."))
-                ;
+                .orElseThrow(() -> new RuntimeException("로그인 유저 정보가 없습니다."));
     }
 
     public MemberResponseDto findMemberByUsername(String username) {   //find Entity by username
