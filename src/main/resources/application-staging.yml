@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: "jdbc:mysql://localhost/like_jobs"
-    username: "root"
-    password: "dnjsdnd1002!"
+    url: "jdbc:mysql://{DB_IP}:{PORT}/like_jobs"
+    username: "{USERLNAME}"
+    password: "{PASSWORD}"
     driver-class-name: com.mysql.cj.jdbc.Driver
 ---
 spring:
@@ -25,9 +25,9 @@ spring:
     cache: false
 ---
 jwt:
-  secret: c3ByaW5nLWJvb3Qtc2VjdXJpdHktand0LUxpa2UtSm9icy1zcHJpbmctYm9vdC1zZWN1cml0eS1qd3QtTGlrZS1Kb2Jz
+  secret: {SECRET}
 ---
 spring:
   redis:
-    host: localhost
+    host: {REDIS_IP}
     port: 6379
